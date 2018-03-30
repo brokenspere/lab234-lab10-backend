@@ -1,0 +1,10 @@
+version: '3.3'
+service:
+  backend:
+    image: brokenspere/se234-lab10-backend:latest
+    ports:
+      - "8082:8080"
+  frontend:
+    image: brokenspere/se-234-lab10-client:latest
+    ports:
+      - "8081:80"   
