@@ -6,14 +6,14 @@ before_install:
   -s`-`uname -m` > docker-compose
 - chmod +x docker-compose
 - sudo mv docker-compose /usr/local/bin
-- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+- docker login -u "brokenspere" -p "$DOCKER_PASSWORD"
 install:
 - mvn install -Dmaven.javadoc.skip=true -B -V
 - ls -l
-- docker build --build-arg JAR_FILE=/target/backend.jar -t $DOCKER_USERNAME/se234-lab10-backend
+- docker build --build-arg JAR_FILE=/target/backend.jar -t brokenspere/se234-lab10-backend
   .
-- docker push $DOCKER_USERNAME/se234-lab10-backend
-- docker pull $DOCKER_USERNAME/se234-lab10-client
+- docker push brokenspere/se234-lab10-backend
+- docker pull brokenspere/se234-lab10-client
 script:
 - docker-compose -H "$DOCKER_HOST" up -d
 cashe:
