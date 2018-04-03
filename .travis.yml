@@ -1,6 +1,6 @@
 language: java
 sudo: required
-before_intall:
+before_install:
 - sudo rm /usr/local/bin/docker-compose
 - curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname
   -s`-`uname -m` > docker-compose
@@ -8,7 +8,7 @@ before_intall:
 - sudo mv docker-compose /usr/local/bin
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 install:
-- mvn install -Dmaven.javadoc.skip=true -B -DOCKER_COMPOSE_VERSION
+- mvn install -Dmaven.javadoc.skip=true -B -V
 - ls -l
 - docker build --build-arg JAR_FILE=/target/backend.jar -t $DOCKER_USERNAME/se234-lab10-backend
   .
@@ -16,8 +16,9 @@ install:
 - docker pull $DOCKER_USERNAME/se234-lab10-client
 script:
 - docker-compose -H "$DOCKER_HOST" up -d
-cache:
-  directories: -"$HOME/.m2"
+cashe:
+  directories:
+  - "$HOME/.m2"
 env:
   global:
   - secure: cjLzRB64GOBG45IIJfRJ+r8M2X57mSuWzD3XSXx5aNEzBRqRky7KU+eDH/PeZXXdeCeopaRtqWGdIob1MfBzKE+glhYVjSH78NVLOH0Q0xlPHZdbPHlm9t4kOPq33al0LUgYu7gA5GcKm0pRIb0+YXLH/ybWgsDphn7A+ZRaaLf0g8w1v82wnqGsZo85PcuU5CJBV4oMnw1EB/UVYGlt+LoQwGtitxoPxNrMv/jUcKrkSn3lwCwOTL3y2cCpfm/9/skBR8SLZpcrCdNgz/8VfBadOFdoLT9r8z6wAsO5ZAan6oDnIb3BnhYBUNxpC/kok11rcnE2k4Bi0NQPyCwH2FOva8ARP3afbgqcDCrVC4EsGdPxI8948pCdwm6/XKG2ZtdRfOFY+npfEwVC3PSwXASDIoXT428lfCjkiCnEwHxszwF/B+q1PtRzG6czDi3ICfQypaVtv9d0IVsEa1oGhxhO/X/vea7/1e2ecjOanIU1HS8zVI/495fvLn4o6WJBD2XrKKER1pUDXexiMyJBNxTj6zhBXzl9kEDbRV6QLDIcV8pp+WyrlX+yq6SQkZNoYku21CIoVAwV6z5TzRO7NuH+zNewvs8wSFkODN1mHPtjqmpIw7QXqS1Q3zeaa1PZmVBirGwQsfQ7XAFWMf9D9n9S40rFBhfyAbLeMmcAKes=
